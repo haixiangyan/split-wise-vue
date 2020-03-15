@@ -1,16 +1,28 @@
 <template>
     <div class="nav">
-        <router-link to="/money">记账</router-link>
+        <router-link to="/money">
+            <Icon name="money"></Icon>
+            记账
+        </router-link>
         |
-        <router-link to="/label">标签</router-link>
+        <router-link to="/label">
+            <Icon name="label"></Icon>
+            标签
+        </router-link>
         |
-        <router-link to="/statistics">统计</router-link>
+        <router-link to="/statistics">
+            <Icon name="chart"></Icon>
+            统计
+        </router-link>
     </div>
 </template>
 
 <script lang="ts">
+  import Icon from "./Icon.vue"
+
   export default {
-    name: "Nav"
+    name: "Nav",
+    components: {Icon}
   }
 </script>
 
