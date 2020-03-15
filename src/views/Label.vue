@@ -1,7 +1,7 @@
 <template>
-    <div>
-        Label
-    </div>
+    <Layout>
+        <div>Label content</div>
+    </Layout>
 </template>
 
 <script lang="ts">
