@@ -25,6 +25,7 @@
 </script>
 
 <style scoped lang="scss">
+    @import "~@/assets/styles/helper.scss";
     nav {
         display: flex;
         flex-direction: row;
@@ -44,8 +45,8 @@
             }
         }
         > .item.selected {
-            color: red;
-            fill: red;
+            color: $selected;
+            fill: $selected;
         }
     }
 </style>
