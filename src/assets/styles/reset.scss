@@ -7,3 +7,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+ul, ol {
+  list-style-type: none;
+}
+
+button, input {
+  font: inherit;
+}
