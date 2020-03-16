@@ -121,6 +121,8 @@
     }
     .number-pad {
         .amount {
+            @extend %clearfix;
+            @extend %innerShadow;
             text-align: right;
             font-size: 36px;
             font-family: Consolas, monospace;
