@@ -14,4 +14,9 @@
         -moz-osx-font-smoothing: grayscale;
         font-size: 16px;
     }
+    .clearfix::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
 </style>
