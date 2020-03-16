@@ -1,28 +1,5 @@
 <template>
-    <Layout>
-        <div class="tags">
-            <ol class="current">
-                <li>衣</li>
-                <li>食</li>
-                <li>住</li>
-                <li>行</li>
-            </ol>
-            <div class="new">
-                <button>新增标签</button>
-            </div>
-        </div>
-        <div>
-            <label class="notes">
-                <span class="name">备注</span>
-                <input type="text" placeholder="在这里输入备注">
-            </label>
-        </div>
-        <div>
-            <ul class="types">
-                <li class="selected">支出</li>
-                <li>收入</li>
-            </ul>
-        </div>
+    <Layout prefix-class="money">
         <div class="number-pad">
             <div class="amount">100</div>
             <div class="number">
@@ -42,6 +19,29 @@
                 <button>.</button>
             </div>
         </div>
+        <div>
+            <ul class="types">
+                <li class="selected">支出</li>
+                <li>收入</li>
+            </ul>
+        </div>
+        <div>
+            <label class="notes">
+                <span class="name">备注</span>
+                <input type="text" placeholder="在这里输入备注">
+            </label>
+        </div>
+        <div class="tags">
+            <ol class="current">
+                <li>衣</li>
+                <li>食</li>
+                <li>住</li>
+                <li>行</li>
+            </ol>
+            <div class="new">
+                <button>新增标签</button>
+            </div>
+        </div>
     </Layout>
 </template>
 
@@ -51,13 +51,25 @@
   }
 </script>
 
+<style lang="scss">
+    .money-content {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+</style>
+
 <style scoped lang="scss">
     @import "~@/assets/styles/helper.scss";
     .tags {
         font-size: 14px;
         padding: 16px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         > .current {
             display: flex;
+            flex-wrap: wrap;
             > li {
                 $h: 24px;
                 background: #d9d9d9;
