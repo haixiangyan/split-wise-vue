@@ -20,25 +20,12 @@
     // data
     type = "-"
     // props
-    // Prop 告诉 Vue, xxx 不是 data 是 prop
-    // Number 告诉 Vue xxx 运行时是个 Number
-    // xxx 属性名
-    // number | undefined 告诉 TS = xxx 编译时的类型
-    @Prop(Number) xxx: number | undefined
     // methods
     selectType(type: string) {
       if (type !== "-" && type !== "+") {
         throw new Error("type is unknown")
       }
       this.type = type
-    }
-    mounted() {
-      if (this.xxx === undefined) {
-        console.log("没有xxx")
-      }
-      else {
-        console.log(this.xxx.toString())
-      }
     }
   }
 </script>
