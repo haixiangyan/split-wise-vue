@@ -7,29 +7,40 @@
     </div>
 </template>
 
-<script>
-export default {
-	name: "Types",
-	props: ['xxx'],
-	data() {
-		return {
-			// '-' 表示支出，'+' 表示收入
-			type: '-'
-		}
-	},
-	methods: {
-		selectType(type) {
-			console.log(type)
-			if (type !== '-' && type !== '+') {
-				throw new Error('type is unkown')
-			}
-			this.type = type
-		}
-	},
-	mounted() {
-		console.log(this.xxx)
-	}
-}
+<script lang="ts">
+  import Vue from "vue"
+  import {Component, Prop} from "vue-property-decorator"
+
+  @Component({
+    props: {
+      propMessage: String
+    }
+  })
+  export default class Types extends Vue {
+    // data
+    type = "-"
+    // props
+    // Prop 告诉 Vue, xxx 不是 data 是 prop
+    // Number 告诉 Vue xxx 运行时是个 Number
+    // xxx 属性名
+    // number | undefined 告诉 TS = xxx 编译时的类型
+    @Prop(Number) xxx: number | undefined
+    // methods
+    selectType(type: string) {
+      if (type !== "-" && type !== "+") {
+        throw new Error("type is unknown")
+      }
+      this.type = type
+    }
+    mounted() {
+      if (this.xxx === undefined) {
+        console.log("没有xxx")
+      }
+      else {
+        console.log(this.xxx.toString())
+      }
+    }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -38,6 +49,7 @@ export default {
         display: flex;
         text-align: center;
         font-size: 24px;
+
         > li {
             width: 50%;
             height: 64px;
@@ -45,6 +57,7 @@ export default {
             align-items: center;
             justify-content: center;
             position: relative;
+
             &.selected::after {
                 content: '';
                 position: absolute;
