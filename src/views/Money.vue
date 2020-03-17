@@ -3,19 +3,25 @@
         <NumberPad/>
         <Types/>
         <Notes/>
-        <Tags/>
+        <Tags :tags="tags"/>
     </Layout>
 </template>
 
-<script lang="ts">
-  import NumberPad from '@/components/NumberPad.vue'
-  import Tags from '@/components/Tags.vue'
-  import Types from '@/components/Types.vue'
-  import Notes from '@/components/Notes.vue'
-  export default {
-    name: "Money",
-    components: {Notes, Types, Tags, NumberPad},
-  }
+<script>
+    import NumberPad from '@/components/NumberPad.vue'
+    import Tags from '@/components/Tags.vue'
+    import Types from '@/components/Types.vue'
+    import Notes from '@/components/Notes.vue'
+
+    export default {
+        name: "Money",
+        data() {
+            return {
+                tags: ['衣', '食', '住', '行', '玩']
+            }
+        },
+        components: {Notes, Types, Tags, NumberPad},
+    }
 </script>
 
 <style lang="scss">
