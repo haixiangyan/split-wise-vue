@@ -29,7 +29,7 @@
   export default class Money extends Vue {
     tags = ["衣", "食", "住", "行", "玩"]
     recordList: Record[] = []
-    record: Record = { tags: [], note: '', type: '-', amount: 10 }
+    record: Record = { tags: [], note: '', type: '-', amount: 0 }
 
     onUpdateSelectedTags(selectedTags: string[]) {
       this.record.tags = selectedTags
