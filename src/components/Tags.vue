@@ -3,7 +3,7 @@
         <ol class="current">
             <li v-for="tag in tags" :key="tag"
                 :class="{selected: selectedTags.indexOf(tag) >= 0}"
-                @click="select(tag)">
+                @click="toggle(tag)">
                 {{tag}}
             </li>
         </ol>
@@ -22,8 +22,13 @@
       @Prop() tags: string[] | undefined
       selectedTags: string[] = []
 
-      select(tag: string) {
-        this.selectedTags.push(tag)
+      toggle(tag: string) {
+        const index = this.selectedTags.indexOf(tag)
+        if (index >= 0) {
+          this.selectedTags.splice(index, 1)
+        } else {
+          this.selectedTags.push(tag)
+        }
       }
     }
 </script>
