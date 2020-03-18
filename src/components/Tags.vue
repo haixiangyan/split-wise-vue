@@ -8,29 +8,40 @@
             </li>
         </ol>
         <div class="new">
-            <button>新增标签</button>
+            <button @click="create">新增标签</button>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import {Component, Prop} from 'vue-property-decorator'
+  import Vue from "vue"
+  import {Component, Prop} from "vue-property-decorator"
 
-    @Component
-    export default class Tags extends Vue {
-      @Prop() tags: string[] | undefined
-      selectedTags: string[] = []
+  @Component
+  export default class Tags extends Vue {
+    @Prop() readonly tags: string[] | undefined
+    selectedTags: string[] = []
 
-      toggle(tag: string) {
-        const index = this.selectedTags.indexOf(tag)
-        if (index >= 0) {
-          this.selectedTags.splice(index, 1)
-        } else {
-          this.selectedTags.push(tag)
-        }
+    create() {
+      const name = window.prompt("请输入标签名")
+      if (!name) {
+        window.alert("标签名不能为空")
+        return
+      }
+      if (this.tags) {
+        this.$emit('update:tags', [...this.tags, name])
       }
     }
+
+    toggle(tag: string) {
+      const index = this.selectedTags.indexOf(tag)
+      if (index >= 0) {
+        this.selectedTags.splice(index, 1)
+      } else {
+        this.selectedTags.push(tag)
+      }
+    }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -55,6 +66,8 @@
                 border-radius: $h/2;
                 padding: 0 12px;
                 margin-right: 12px;
+                margin-bottom: 8px;
+
                 &.selected {
                     background: darken($bg, 50%)
                 }
