@@ -2,19 +2,27 @@
     <div>
         <label class="notes">
             <span class="name">备注</span>
-            <input type="text" v-model="note" placeholder="在这里输入备注">
+            <input
+                type="text" v-model="note"
+                placeholder="在这里输入备注"
+            >
         </label>
     </div>
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import {Component} from "vue-property-decorator"
+  import Vue from "vue"
+  import {Component, Watch} from "vue-property-decorator"
 
-    @Component
-    export default class Notes extends Vue {
-      note = ''
+  @Component
+  export default class Notes extends Vue {
+    note = ""
+
+    @Watch('note')
+    onNoteChanged(note: string) {
+      this.$emit('update:note', note)
     }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -24,9 +32,11 @@
         padding-left: 16px;
         display: flex;
         align-items: center;
+
         .name {
             padding-right: 16px;
         }
+
         input {
             height: 64px;
             flex-grow: 1;

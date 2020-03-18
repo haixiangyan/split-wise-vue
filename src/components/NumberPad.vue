@@ -2,17 +2,17 @@
     <div class="number-pad">
         <div class="amount">{{amount}}</div>
         <div class="number">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button @click="enterNumber">1</button>
+            <button @click="enterNumber">2</button>
+            <button @click="enterNumber">3</button>
             <button @click="del">删除</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
+            <button @click="enterNumber">4</button>
+            <button @click="enterNumber">5</button>
+            <button @click="enterNumber">6</button>
             <button @click="clear">清空</button>
             <button @click="enterNumber">7</button>
             <button>8</button>
-            <button>9</button>
+            <button @click="enterNumber">9</button>
             <button @click="confirm" class="ok-button">OK</button>
             <button @click="enterNumber" class="zero-button">0</button>
             <button @click="enterNumber">.</button>
@@ -22,11 +22,12 @@
 
 <script lang="ts">
   import Vue from "vue"
-  import {Component} from "vue-property-decorator"
+  import {Component, Prop} from "vue-property-decorator"
 
   @Component
   export default class NumberPad extends Vue {
-    amount = '0'
+    @Prop(Number) readonly output!: number
+    amount = this.output.toString()
 
     del() {
       this.amount = this.amount.slice(0, -1) || '0'
@@ -37,7 +38,7 @@
     }
 
     confirm() {
-      console.log(this.amount)
+      this.$emit('update:output', parseFloat(this.amount))
     }
 
     enterNumber(event: MouseEvent) {
