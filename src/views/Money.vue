@@ -15,35 +15,27 @@
   import Tags from "@/components/Tags.vue"
   import Types from "@/components/Types.vue"
   import Notes from "@/components/Notes.vue"
-  const model = require('@/model.js').model
-
-  type Record = {
-    tags: string[];
-    note: string;
-    type: string;
-    amount: number;
-  }
+  import model from "@/model"
 
   @Component({
     components: {Tags, Notes, Types, NumberPad}
   })
   export default class Money extends Vue {
     tags = ["衣", "食", "住", "行", "玩"]
-    recordList: Record[] = model.fetch()
-    record: Record = { tags: [], note: '', type: '-', amount: 0 }
+    recordList = model.fetch()
+    record: RecordItem = { tags: [], note: '', type: '-', amount: 0 }
 
     onUpdateSelectedTags(selectedTags: string[]) {
       this.record.tags = selectedTags
     }
 
     saveRecord() {
-      const deepClone = JSON.parse(JSON.stringify(this.record))
-      this.recordList.push(deepClone)
+      this.recordList.push(model.clone(this.record))
     }
 
     @Watch('recordList')
     onRecordListChanged() {
-      window.localStorage.setItem('recordList', JSON.stringify(this.recordList))
+      model.save(this.recordList)
     }
 
     onUpdateNote(note: string) {
