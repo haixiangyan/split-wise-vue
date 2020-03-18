@@ -1,6 +1,6 @@
 <template>
     <Layout prefix-class="money">
-        <NumberPad :output.sync="record.amount"/>
+        <NumberPad :output.sync="record.amount" @submit="saveRecord"/>
         <Types :type.sync="record.type"/>
         <Notes @update:note="onUpdateNote"/>
         <Tags :tags.sync="tags" @update:selectedTags="onUpdateSelectedTags"/>
@@ -9,7 +9,7 @@
 
 <script lang="ts">
   import Vue from "vue"
-  import {Component} from "vue-property-decorator"
+  import {Component, Watch} from "vue-property-decorator"
 
   import NumberPad from "@/components/NumberPad.vue"
   import Tags from "@/components/Tags.vue"
@@ -28,14 +28,21 @@
   })
   export default class Money extends Vue {
     tags = ["衣", "食", "住", "行", "玩"]
+    recordList: Record[] = []
     record: Record = { tags: [], note: '', type: '-', amount: 10 }
 
     onUpdateSelectedTags(selectedTags: string[]) {
       this.record.tags = selectedTags
     }
 
-    onUpdateAmount(amount: string) {
-      this.record.amount = parseFloat(amount)
+    saveRecord() {
+      const deepClone = JSON.parse(JSON.stringify(this.record))
+      this.recordList.push(deepClone)
+    }
+
+    @Watch('recordList')
+    onRecordListChanged() {
+      window.localStorage.setItem('recordList', JSON.stringify(this.recordList))
     }
 
     onUpdateNote(note: string) {

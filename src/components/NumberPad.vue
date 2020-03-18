@@ -39,6 +39,7 @@
 
     confirm() {
       this.$emit('update:output', parseFloat(this.amount))
+      this.$emit('submit', this.amount)
     }
 
     enterNumber(event: MouseEvent) {
