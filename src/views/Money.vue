@@ -15,6 +15,7 @@
   import Tags from "@/components/Tags.vue"
   import Types from "@/components/Types.vue"
   import Notes from "@/components/Notes.vue"
+  const model = require('@/model.js').model
 
   type Record = {
     tags: string[];
@@ -28,7 +29,7 @@
   })
   export default class Money extends Vue {
     tags = ["衣", "食", "住", "行", "玩"]
-    recordList: Record[] = []
+    recordList: Record[] = model.fetch()
     record: Record = { tags: [], note: '', type: '-', amount: 0 }
 
     onUpdateSelectedTags(selectedTags: string[]) {
