@@ -4,6 +4,7 @@
             <Icon name="left"/>
         </div>
         <FormItem field-name="标签名" placeholder="请输入标签名"/>
+        <Button>删除标签</Button>
     </Layout>
 </template>
 

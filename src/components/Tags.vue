@@ -1,10 +1,10 @@
 <template>
     <div class="tags">
         <ol class="current">
-            <li v-for="tag in tags" :key="tag"
-                :class="{selected: selectedTags.indexOf(tag) >= 0}"
+            <li v-for="tag in tags" :key="tag.id"
+                :class="{selected: selectedTags.indexOf(tag.id) >= 0}"
                 @click="toggle(tag)">
-                {{tag}}
+                {{tag.name}}
             </li>
         </ol>
         <div class="new">
