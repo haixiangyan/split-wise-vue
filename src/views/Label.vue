@@ -23,7 +23,7 @@
     components: {Button}
   })
   export default class Label extends Vue {
-    tags = tagListModel.data
+    tags = window.tagList
 
     createTag() {
       const name = window.prompt("请输出标签名")
