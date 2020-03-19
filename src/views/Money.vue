@@ -34,7 +34,7 @@
     }
 
     saveRecord() {
-      this.recordList.push(recordListModel.clone(this.record))
+      recordListModel.create(this.record)
     }
 
     @Watch('recordList')
