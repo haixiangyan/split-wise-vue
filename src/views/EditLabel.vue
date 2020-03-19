@@ -49,9 +49,13 @@
       }
     }
 
-    removeTag(id: string) {
+    removeTag() {
       if (this.tag) {
-        tagListModel.remove(this.tag.id)
+        if (tagListModel.remove(this.tag.id) === 'success') {
+          this.$router.push('/label')
+        } else {
+          window.alert('删除失败')
+        }
       }
     }
 
