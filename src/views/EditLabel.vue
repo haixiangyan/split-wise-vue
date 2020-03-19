@@ -21,7 +21,6 @@
 <script lang="ts">
   import Vue from "vue"
   import {Component} from "vue-property-decorator"
-  import tagListModel from "@/models/tagListModel"
   import FormItem from "@/components/FormItem.vue"
   import Button from "@/components/Button.vue"
 
@@ -29,38 +28,29 @@
     components: {FormItem, Button}
   })
   export default class EditLabel extends Vue {
-    tag?: { id: string; name: string } = undefined
+    tag?: Tag
 
     created() {
-      const id = this.$route.params.id
-      tagListModel.fetch()
-      const tags = tagListModel.data
-      const tag = tags.find(tag => tag.id === id)
-      if (tag) {
-        this.tag = tag
-      } else {
+      this.tag = window.findTag(this.$route.params.id)
+      if (!this.tag) {
         this.$router.replace("/404")
       }
     }
 
     updateTag(name: string) {
       if (this.tag) {
-        tagListModel.update(this.tag.id, name)
+        window.updateTag(this.tag.id, name)
       }
     }
 
     removeTag() {
       if (this.tag) {
-        if (tagListModel.remove(this.tag.id) === 'success') {
-          this.$router.push('/label')
-        } else {
-          window.alert('删除失败')
-        }
+        window.removeTag(this.tag.id)
       }
     }
 
     back() {
-      this.$router.push('/label')
+      this.$router.push("/label")
     }
   }
 </script>
