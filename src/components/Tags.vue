@@ -16,17 +16,21 @@
 <script lang="ts">
   import Vue from "vue"
   import {Component} from "vue-property-decorator"
-  import xxx from "@/lib/xxx"
 
-  @Component
+  @Component({
+    computed: {
+      tags() {
+        return []
+      }
+    }
+  })
   export default class Tags extends Vue {
-    tags = xxx.fetchTags()
     selectedTags: string[] = []
 
     create() {
       const name = window.prompt("请输入标签名")
       if (!name) return window.alert("标签名不能为空")
-      xxx.createTag(name)
+      this.$store.commit('createTag', name)
     }
 
     toggle(tag: string) {

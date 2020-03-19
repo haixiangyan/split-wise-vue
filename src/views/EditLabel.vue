@@ -23,16 +23,15 @@
   import {Component} from "vue-property-decorator"
   import FormItem from "@/components/FormItem.vue"
   import Button from "@/components/Button.vue"
-  import xxx from "@/lib/xxx"
 
   @Component({
-    components: {FormItem, Button}
+    components: {FormItem, Button},
   })
   export default class EditLabel extends Vue {
     tag?: Tag
 
     created() {
-      this.tag = xxx.findTag(this.$route.params.id)
+      // this.tag = xxx.findTag(this.$route.params.id)
       if (!this.tag) {
         this.$router.replace("/404")
       }
@@ -40,13 +39,13 @@
 
     updateTag(name: string) {
       if (this.tag) {
-        xxx.updateTag(this.tag.id, name)
+        this.$store.commit('updateTag', {id: this.tag.id, name})
       }
     }
 
     removeTag() {
       if (this.tag) {
-        xxx.removeTag(this.tag.id)
+        this.$store.commit('removeTag', this.tag.id)
       }
     }
 

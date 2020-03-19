@@ -17,7 +17,6 @@
   import Tags from "@/components/Tags.vue"
   import Types from "@/components/Types.vue"
   import FormItem from "@/components/FormItem.vue"
-  import xxx from "@/lib/xxx"
 
   @Component({
     components: {Tags, FormItem, Types, NumberPad}
@@ -25,8 +24,12 @@
   export default class Money extends Vue {
     record: RecordItem = { tags: [], note: '', type: '-', amount: 0 }
 
+    created() {
+      this.$store.commit('fetchRecords')
+    }
+
     saveRecord() {
-      xxx.createRecord(this.record)
+      this.$store.commit('createRecord', this.record)
     }
   }
 </script>
