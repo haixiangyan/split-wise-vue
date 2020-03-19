@@ -20,12 +20,16 @@
   @Component({
     computed: {
       tags() {
-        return []
+        return this.$store.state.tagList
       }
     }
   })
   export default class Tags extends Vue {
     selectedTags: string[] = []
+
+    created() {
+      this.$store.commit('fetchTags')
+    }
 
     create() {
       const name = window.prompt("请输入标签名")
