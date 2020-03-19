@@ -23,9 +23,6 @@
     components: {Tags, FormItem, Types, NumberPad}
   })
   export default class Money extends Vue {
-    tags = xxx.tagList
-    recordList = xxx.recordList
-
     record: RecordItem = { tags: [], note: '', type: '-', amount: 0 }
 
     saveRecord() {
