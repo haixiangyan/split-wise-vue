@@ -46,6 +46,7 @@
     removeTag() {
       if (this.tag) {
         this.$store.commit('removeTag', this.tag.id)
+        this.back()
       }
     }
 

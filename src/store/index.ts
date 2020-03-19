@@ -50,6 +50,24 @@ const store = new Vuex.Store({
     saveTags(state) {
       window.localStorage.setItem(TAG_LIST, JSON.stringify(state.tagList))
     },
+    updateTag(state, payload: {id: string; name: string}) {
+      const {id, name} = payload
+      // duplicated
+      if (state.tagList.find(item => item.name === name)) {
+        return 'duplicated'
+      }
+
+      const tag = state.tagList.find(item => item.id === id)
+      // not found
+      if (tag) {
+        tag.name = name
+        store.commit('saveTags')
+      }
+    },
+    removeTag(state, id: string) {
+      state.tagList = state.tagList.filter(item => item.id != id)
+      store.commit('saveTags')
+    },
   }
 })
 
