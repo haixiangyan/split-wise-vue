@@ -5,7 +5,7 @@
         <div class="notes">
             <FormItem field-name="备注" placeholder="在这里输入备注" :value.sync="record.note"/>
         </div>
-        <Tags :tags.sync="tags" @update:selectedTags="onUpdateSelectedTags"/>
+        <Tags/>
     </Layout>
 </template>
 
@@ -27,10 +27,6 @@
     recordList = xxx.recordList
 
     record: RecordItem = { tags: [], note: '', type: '-', amount: 0 }
-
-    onUpdateSelectedTags(selectedTags: string[]) {
-      this.record.tags = selectedTags
-    }
 
     saveRecord() {
       xxx.createRecord(this.record)

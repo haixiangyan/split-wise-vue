@@ -15,22 +15,18 @@
 
 <script lang="ts">
   import Vue from "vue"
-  import {Component, Prop} from "vue-property-decorator"
+  import {Component} from "vue-property-decorator"
+  import xxx from "@/lib/xxx"
 
   @Component
   export default class Tags extends Vue {
-    @Prop() readonly tags: string[] | undefined
+    tags = xxx.fetchTags()
     selectedTags: string[] = []
 
     create() {
       const name = window.prompt("请输入标签名")
-      if (!name) {
-        window.alert("标签名不能为空")
-        return
-      }
-      if (this.tags) {
-        this.$emit('update:tags', [...this.tags, name])
-      }
+      if (!name) return window.alert("标签名不能为空")
+      xxx.createTag(name)
     }
 
     toggle(tag: string) {
@@ -40,7 +36,7 @@
       } else {
         this.selectedTags.push(tag)
       }
-      this.$emit('update:selectedTags', this.selectedTags)
+      this.$emit("update:selectedTags", this.selectedTags)
     }
   }
 </script>
