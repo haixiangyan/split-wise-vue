@@ -2,7 +2,7 @@
     <Layout prefix-class="money">
         <NumberPad :output.sync="record.amount" @submit="saveRecord"/>
         <Types :type.sync="record.type"/>
-        <Notes @update:note="onUpdateNote"/>
+        <Notes field-name="备注" placeholder="在这里输入备注" @update:note="onUpdateNote"/>
         <Tags :tags.sync="tags" @update:selectedTags="onUpdateSelectedTags"/>
     </Layout>
 </template>
