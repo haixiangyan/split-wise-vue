@@ -16,18 +16,18 @@
   import Vue from "vue"
   import {Component} from "vue-property-decorator"
   import Button from '@/components/Button.vue'
-  import mystore from "@/lib/mystore"
+  import xxx from "@/lib/xxx"
 
   @Component({
     components: {Button}
   })
   export default class Label extends Vue {
-    tags = mystore.tagList
+    tags = xxx.tagList
 
     createTag() {
       const name = window.prompt("请输出标签名")
       if (name) {
-        mystore.createTag(name)
+        xxx.createTag(name)
       }
     }
   }

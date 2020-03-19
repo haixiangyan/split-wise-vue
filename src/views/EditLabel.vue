@@ -23,7 +23,7 @@
   import {Component} from "vue-property-decorator"
   import FormItem from "@/components/FormItem.vue"
   import Button from "@/components/Button.vue"
-  import mystore from "@/lib/mystore"
+  import xxx from "@/lib/xxx"
 
   @Component({
     components: {FormItem, Button}
@@ -32,7 +32,7 @@
     tag?: Tag
 
     created() {
-      this.tag = mystore.findTag(this.$route.params.id)
+      this.tag = xxx.findTag(this.$route.params.id)
       if (!this.tag) {
         this.$router.replace("/404")
       }
@@ -40,13 +40,13 @@
 
     updateTag(name: string) {
       if (this.tag) {
-        mystore.updateTag(this.tag.id, name)
+        xxx.updateTag(this.tag.id, name)
       }
     }
 
     removeTag() {
       if (this.tag) {
-        mystore.removeTag(this.tag.id)
+        xxx.removeTag(this.tag.id)
       }
     }
 
