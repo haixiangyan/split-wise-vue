@@ -1,6 +1,8 @@
 <template>
     <Layout>
-        edit
+        <div>
+            <Icon name="left"/>
+        </div>
     </Layout>
 </template>
 
