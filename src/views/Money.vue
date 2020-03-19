@@ -2,7 +2,9 @@
     <Layout prefix-class="money">
         <NumberPad :output.sync="record.amount" @submit="saveRecord"/>
         <Types :type.sync="record.type"/>
-        <FormItem field-name="备注" placeholder="在这里输入备注" @update:note="onUpdateNote"/>
+        <div class="notes">
+            <FormItem field-name="备注" placeholder="在这里输入备注" @update:note="onUpdateNote"/>
+        </div>
         <Tags :tags.sync="tags" @update:selectedTags="onUpdateSelectedTags"/>
     </Layout>
 </template>
@@ -54,4 +56,7 @@
 </style>
 
 <style scoped lang="scss">
+    .notes {
+        padding: 12px 0;
+    }
 </style>

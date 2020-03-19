@@ -53,6 +53,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        background: white;
 
         > .current {
             display: flex;
