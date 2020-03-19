@@ -19,7 +19,7 @@ type TagListModel = {
   remove: (id: string) => 'success';
 }
 
-interface Window {
+type S = {
   tagList: Tag[];
   findTag: (id: string) => Tag | undefined;
   createTag: (name: string) => void;
