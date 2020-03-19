@@ -31,6 +31,7 @@
     tag?: Tag
 
     created() {
+      this.$store.commit('fetchTags')
       this.tag = this.$store.getters.findTag(this.$route.params.id)
       if (!this.tag) {
         this.$router.replace("/404")
