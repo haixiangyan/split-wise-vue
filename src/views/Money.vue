@@ -3,7 +3,7 @@
         <NumberPad :output.sync="record.amount" @submit="saveRecord"/>
         <Types :type.sync="record.type"/>
         <div class="notes">
-            <FormItem field-name="备注" placeholder="在这里输入备注" @update:note="onUpdateNote"/>
+            <FormItem field-name="备注" placeholder="在这里输入备注" :value.sync="record.note"/>
         </div>
         <Tags :tags.sync="tags" @update:selectedTags="onUpdateSelectedTags"/>
     </Layout>
@@ -40,10 +40,6 @@
     @Watch('recordList')
     onRecordListChanged() {
       recordListModel.save(this.recordList)
-    }
-
-    onUpdateNote(note: string) {
-      this.record.note = note
     }
   }
 </script>
