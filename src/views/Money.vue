@@ -15,14 +15,16 @@
   import Tags from "@/components/Tags.vue"
   import Types from "@/components/Types.vue"
   import Notes from "@/components/Notes.vue"
-  import model from "@/model"
+  import recordListModel from "@/models/recordListModel"
+  import tagListModel from "@/models/tagListModel"
 
   @Component({
     components: {Tags, Notes, Types, NumberPad}
   })
   export default class Money extends Vue {
-    tags = ["衣", "食", "住", "行", "玩"]
-    recordList = model.fetch()
+    tags = tagListModel.fetch()
+    recordList = recordListModel.fetch()
+
     record: RecordItem = { tags: [], note: '', type: '-', amount: 0 }
 
     onUpdateSelectedTags(selectedTags: string[]) {
@@ -30,12 +32,12 @@
     }
 
     saveRecord() {
-      this.recordList.push(model.clone(this.record))
+      this.recordList.push(recordListModel.clone(this.record))
     }
 
     @Watch('recordList')
     onRecordListChanged() {
-      model.save(this.recordList)
+      recordListModel.save(this.recordList)
     }
 
     onUpdateNote(note: string) {

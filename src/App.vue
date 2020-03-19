@@ -13,6 +13,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         font-size: 16px;
+        background: #f5f5f5;
     }
     .clearfix::after {
         content: '';
