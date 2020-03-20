@@ -3,6 +3,7 @@ type RecordItem = {
   note: string;
   type: string;
   amount: number;
+  createdAt?: string;
 }
 
 type Tag = {
@@ -10,11 +11,3 @@ type Tag = {
   name: string;
 }
 
-type TagListModel = {
-  data: Tag[];
-  fetch: () => Tag[];
-  update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
-  create: (name: string) => 'success' | 'duplicated';
-  save: () => void;
-  remove: (id: string) => 'success';
-}
