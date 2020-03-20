@@ -4,7 +4,7 @@
         <Tabs class-prefix="interval" :value.sync="tab" :data-source="tabs"/>
         <ol>
             <li v-for="(group, index) in result" :key="index">
-                <h3 class="title">{{group.title}}</h3>
+                <h3 class="title">{{beautify(group.title)}}</h3>
                 <ol>
                     <li v-for="item in group.items" :key="item.id" class="record">
                         <span>{{tagString(item.tags)}}</span>
@@ -19,6 +19,7 @@
 
 <script lang="ts">
   import Vue from "vue"
+  import dayjs from 'dayjs'
   import {Component} from "vue-property-decorator"
   import Tabs from "@/components/Tabs.vue"
   import intervalList from "@/constants/intervalList"
@@ -49,6 +50,23 @@
         hashTable[date].items.push(recordList[i])
       }
       return hashTable
+    }
+
+    beautify(title: string) {
+      const day = dayjs(title)
+      const now = dayjs()
+      if (dayjs(title).isSame(now, 'day')) {
+        return '今天'
+      }
+      else if (dayjs(title).isSame(now.subtract(1, 'day'))) {
+        return '昨天'
+      }
+      else if (day.isSame(now, 'year')) {
+        return day.format('M月D日')
+      }
+      else {
+        return day.format('YYYY年MM月DD日')
+      }
     }
 
     beforeCreate() {
