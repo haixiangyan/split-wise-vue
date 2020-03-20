@@ -16,12 +16,11 @@
   import NumberPad from "@/components/NumberPad.vue"
   import Tags from "@/components/Tags.vue"
   import Tabs from '@/components/Tabs.vue'
-  import Types from "@/components/Types.vue"
   import FormItem from "@/components/FormItem.vue"
   import typeList from "@/constants/typeList"
 
   @Component({
-    components: {Tags, FormItem, Types, NumberPad, Tabs}
+    components: {Tags, FormItem, NumberPad, Tabs}
   })
   export default class Money extends Vue {
     record: RecordItem = { tags: [], note: '', type: '-', amount: 0 }
