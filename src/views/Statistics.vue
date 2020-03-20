@@ -2,18 +2,18 @@
     <Layout>
         <Tabs class-prefix="type" :data-source="types" :value.sync="type"></Tabs>
         <Tabs class-prefix="interval" :value.sync="tab" :data-source="tabs"/>
-        <div>
-            <ol>
-                <li v-for="(group, index) in result" :key="index">
-                    <h3>{{group.title}}</h3>
-                    <ol>
-                        <li v-for="item in group.items" :key="item.id">
-                            Created At: {{item.createdAt}}, Amount: {{item.amount}}
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-        </div>
+        <ol>
+            <li v-for="(group, index) in result" :key="index">
+                <h3 class="title">{{group.title}}</h3>
+                <ol>
+                    <li v-for="item in group.items" :key="item.id" class="record">
+                        <span>{{tagString(item.tags)}}</span>
+                        <span class="note">{{item.note}}</span>
+                        <span>{{item.amount}}$</span>
+                    </li>
+                </ol>
+            </li>
+        </ol>
     </Layout>
 </template>
 
@@ -28,20 +28,23 @@
     components: {Tabs}
   })
   export default class Statistics extends Vue {
+    tagString(tags: Tag[]) {
+      return tags.length === 0 ? "无" : tags.join(",")
+    }
+
     get recordList() {
       return this.$store.state.recordList
     }
 
     get result() {
       type Items = RecordItem[]
-      type HashTableValue = {title: string; items: Items}
+      type HashTableValue = { title: string; items: Items }
 
       const {recordList} = this
-      const hashTable: {[key: string]: HashTableValue} = {}
+      const hashTable: { [key: string]: HashTableValue } = {}
       for (let i = 0; i < recordList.length; i++) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const [date, time] = recordList[i].createdAt!.split('T')
-        console.log(date, time)
+        const [date, time] = recordList[i].createdAt!.split("T")
         hashTable[date] = hashTable[date] || {title: date, items: []}
         hashTable[date].items.push(recordList[i])
       }
@@ -49,7 +52,7 @@
     }
 
     beforeCreate() {
-      this.$store.commit('fetchRecords')
+      this.$store.commit("fetchRecords")
     }
 
     type = "-"
@@ -73,6 +76,28 @@
     }
 
     ::-v-deep .interval-wrapper {
-        height: 48px!important;
+        height: 48px !important;
+    }
+
+    %item {
+        padding: 8px 16px;
+        min-height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .title {
+        @extend %item;
+    }
+
+    .record {
+        background: white;
+        @extend %item;
+    }
+    .note {
+        margin-right: auto;
+        margin-left: 16px;
+        color: #999;
     }
 </style>
