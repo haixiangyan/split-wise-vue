@@ -21,7 +21,6 @@
   import dayjs from "dayjs"
   import {Component} from "vue-property-decorator"
   import Tabs from "@/components/Tabs.vue"
-  import intervalList from "@/constants/intervalList"
   import typeList from "@/constants/typeList"
   import clone from "@/lib/clone"
 
