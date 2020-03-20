@@ -42,7 +42,7 @@
       if (recordList.length === 0) {
         return []
       }
-      const newList = clone(recordList)
+      const newList = clone(recordList).filter(r => r.type === this.type)
         .sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf())
       const groupList = [{title: dayjs(recordList[0].createdAt).format("YYYY-MM-DD"), items: [recordList[0]]}]
       for (let i = 1; i < newList.length; i++) {
